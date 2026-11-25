@@ -2,7 +2,9 @@
 
 **Your week, out loud.** A weekly hub for you and your manager.
 
-🌐 **[Try it](https://maggiecurrie.github.io/wins-out-loud/)**
+🌐 **[Open the prototype](https://maggiecurrie.github.io/wins-out-loud/)**
+
+A working prototype, open for anyone to use, adapt, and build on for their own team.
 
 ---
 
