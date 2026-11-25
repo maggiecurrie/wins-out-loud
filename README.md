@@ -1,6 +1,6 @@
 # Wins Out Loud
 
-**Your week, out loud.** A weekly hub for you and your manager.
+**Your team's week, out loud.** A weekly 1:1 hub for managers and their teams.
 
 🌐 **[Open the prototype](https://maggiecurrie.github.io/wins-out-loud/)**
 
