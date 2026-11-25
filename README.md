@@ -24,10 +24,6 @@
 - **For you:** a running database of your work, with results, proof, and the stories behind it. Weekly 1:1s take minutes to prep, and quarterly check-ins and reviews come with receipts.
 - **For your manager:** wins, work in progress, and blockers at a glance, without chasing anyone for updates, plus specific, dated examples for feedback and reviews.
 
-## Why I built it
-
-When I started my freelance business, I hired a small team and suddenly I was the one running the 1:1s. People did great work all week, then couldn't remember half of it in our check-ins. So we built a habit: jot down wins as they happen, with what changed and the moment behind it, and turn them into a quick weekly update. Wins Out Loud is that habit, turned into a tool anyone can use.
-
 ## Privacy
 
 - Your wins are saved only in your own browser. Nothing is stored on a server.
