@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wins Out Loud · A weekly hub for you and your manager</title>
+<meta name="description" content="Talk through your week in two minutes. Wins, what's in progress and where you're stuck become one clear page for your weekly 1:1s and quarterly check-ins. A free tool by Maggie Currie.">
+<meta property="og:title" content="Wins Out Loud">
+<meta property="og:description" content="Talk through your week in two minutes. Share one clear page with your manager before your 1:1.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maggiecurrie.github.io/wins-out-loud/">
+<meta property="og:image" content="https://maggiecurrie.github.io/wins-out-loud/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#000; --muted:#5a5a5a; --line:#e5e5e5; --soft:#f4f4f4; --radius:14px; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:#fff; line-height:1.55; font-size:16px; }
+  a { color:var(--ink); }
+  button, input, select, textarea { font-family:inherit; font-size:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+  h1, h2, h3 { font-weight:800; line-height:1.06; letter-spacing:-0.035em; margin:0 0 14px; }
+  h1 { font-size:clamp(2.6rem, 7vw, 5rem); letter-spacing:-0.05em; }
+  h2 { font-size:clamp(1.8rem, 4vw, 2.6rem); }
+  h3 { font-size:1.1rem; letter-spacing:-0.015em; }
+  h1 em, h2 em { font-style:italic; font-weight:400; }
+  .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .muted { color:var(--muted); }
+  .lead { font-size:1.2rem; max-width:640px; }
+  section { padding:88px 0; }
+  [hidden] { display:none !important; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:12px 22px; border-radius:999px; font-weight:600; font-size:0.95rem; text-decoration:none; cursor:pointer; border:1.5px solid var(--ink); background:#fff; color:var(--ink); white-space:nowrap; }
+  .btn:hover { background:var(--ink); color:#fff; }
+  .btn.primary { background:var(--ink); color:#fff; }
+  .btn.primary:hover { background:#333; }
+  .btn.small { padding:7px 13px; font-size:0.84rem; }
+  .btn.ghost { border-color:transparent; }
+  .btn.ghost:hover { background:var(--soft); color:var(--ink); }
+  .btn.light { border-color:#fff; background:transparent; color:#fff; }
+  .btn.light:hover { background:#fff; color:#000; }
+  .btn.solid-light { background:#fff; color:#000; border-color:#fff; }
+  .btn.solid-light:hover { background:#ddd; }
+  .btns { display:flex; gap:10px; flex-wrap:wrap; }
+
+  /* Hero */
+  .hero { background:var(--ink); color:#fff; padding:28px 0 96px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:80px; }
+  .brand { font-weight:800; letter-spacing:-0.02em; color:#fff; text-decoration:none; font-size:1.05rem; }
+  .brand em { font-weight:400; }
+  .topbar nav { display:flex; gap:22px; flex-wrap:wrap; }
+  .topbar nav a { color:#bbb; text-decoration:none; font-size:0.92rem; }
+  .topbar nav a:hover { color:#fff; }
+  .hero .eyebrow { color:#999; }
+  .hero h1 { color:#fff; }
+  .hero p.lead { color:#cfcfcf; margin:0 0 32px; }
+  .hero p.lead strong { color:#fff; }
+  .hero-note { margin-top:18px; color:#888; font-size:0.88rem; }
+
+  /* Preview card in hero */
+  .hero-grid { display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center; }
+  .preview { background:#fff; color:#000; border-radius:18px; padding:24px 26px; box-shadow:0 30px 60px rgba(0,0,0,0.4); font-size:0.9rem; transform:rotate(1.2deg); }
+  .preview .p-head { display:flex; justify-content:space-between; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .preview h4 { margin:14px 0 6px; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; }
+  .preview ul { margin:0; padding-left:18px; }
+  .preview li { margin-bottom:4px; }
+  .preview .topline { font-weight:700; font-size:1.02rem; letter-spacing:-0.01em; line-height:1.35; }
+
+  /* Problem */
+  .problems { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:40px; }
+  .problems.two { grid-template-columns:1fr 1fr; }
+  .problems div { border:1px solid var(--line); border-radius:var(--radius); padding:26px; }
+  .problems b { display:block; font-size:2.2rem; font-weight:800; letter-spacing:-0.04em; line-height:1; margin-bottom:14px; }
+  .problems p { margin:0; color:var(--muted); }
+
+  /* Story */
+  .story { background:var(--soft); }
+  .story-grid { display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start; }
+  .story blockquote { margin:0; font-size:clamp(1.3rem, 2.6vw, 1.7rem); font-weight:700; letter-spacing:-0.025em; line-height:1.3; }
+  .story blockquote em { font-weight:400; }
+  .story p { font-size:1.05rem; margin:0 0 16px; }
+  .sig { font-weight:700; margin-top:22px; }
+  .sig span { display:block; font-weight:400; color:var(--muted); font-size:0.92rem; }
+
+  /* How */
+  .how { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-top:40px; counter-reset:s; }
+  .how div { border:1px solid var(--line); border-radius:var(--radius); padding:24px; counter-increment:s; position:relative; }
+  .how div::before { content:counter(s); display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--ink); color:#fff; font-weight:700; margin-bottom:16px; }
+  .how p { margin:0; color:var(--muted); font-size:0.95rem; }
+  .how .when { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+
+  /* App */
+  .app { background:var(--ink); color:#fff; padding:80px 0 96px; }
+  .app h2 { color:#fff; }
+  .app .eyebrow { color:#999; }
+  .app .lead { color:#cfcfcf; }
+  .app-shell { background:#fff; color:#000; border-radius:20px; margin-top:36px; overflow:hidden; }
+  .app-tabs { display:flex; gap:4px; padding:12px; border-bottom:1px solid var(--line); background:#fafafa; flex-wrap:wrap; }
+  .app-tab { padding:9px 16px; border-radius:999px; border:none; background:transparent; font-weight:600; cursor:pointer; color:var(--muted); }
+  .app-tab[aria-selected="true"] { background:var(--ink); color:#fff; }
+  .app-tab .n { display:inline-block; min-width:20px; padding:0 6px; border-radius:999px; background:var(--line); color:#000; font-size:0.74rem; margin-left:6px; }
+  .app-tab[aria-selected="true"] .n { background:#fff; }
+  .panel { padding:28px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+
+  .field { margin-bottom:14px; }
+  .field label { display:block; font-weight:600; font-size:0.88rem; margin-bottom:6px; }
+  .field label small { font-weight:400; color:var(--muted); }
+  .field input, .field textarea, .field select { width:100%; padding:11px 14px; border:1.5px solid #ccc; border-radius:10px; background:#fff; }
+  .field textarea { min-height:70px; resize:vertical; }
+  .field input:focus, .field textarea:focus, .field select:focus { outline:none; border-color:var(--ink); }
+  .kinds { display:flex; gap:6px; flex-wrap:wrap; }
+  .kind { padding:7px 12px; border-radius:999px; border:1px solid #bbb; background:#fff; cursor:pointer; font-size:0.84rem; font-weight:500; }
+  .kind[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .hint { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  .list-head { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .list-head h3 { margin:0; }
+  .entries { display:flex; flex-direction:column; gap:10px; max-height:560px; overflow-y:auto; padding-right:4px; }
+  .entry { border:1px solid var(--line); border-radius:12px; padding:14px 16px; position:relative; }
+  .entry .e-top { display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:0.76rem; color:var(--muted); margin-bottom:4px; }
+  .tag { font-size:0.7rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; background:var(--soft); color:#000; padding:2px 8px; border-radius:6px; }
+  .entry .what { font-weight:700; margin:0; }
+  .entry .impact { margin:4px 0 0; }
+  .entry .moment { margin:6px 0 0; font-style:italic; color:var(--muted); font-size:0.92rem; }
+  .entry .proof { font-size:0.85rem; margin-top:6px; display:inline-block; }
+  .nudge { display:inline-block; margin-top:8px; font-size:0.78rem; font-weight:600; background:#000; color:#fff; padding:3px 10px; border-radius:999px; cursor:pointer; border:none; }
+  .del { position:absolute; top:10px; right:10px; border:none; background:none; color:#999; cursor:pointer; font-size:1.1rem; line-height:1; padding:4px; }
+  .del:hover { color:#000; }
+  .empty { border:1.5px dashed #ccc; border-radius:12px; padding:28px; text-align:center; color:var(--muted); }
+
+  .simple-list { display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+  .simple-item { display:flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+  .simple-item input[type=checkbox] { width:18px; height:18px; accent-color:#000; }
+  .simple-item span { flex:1; }
+  .simple-item.done span { text-decoration:line-through; color:#999; }
+  .simple-item .del { position:static; }
+  .add-row { display:flex; gap:8px; }
+  .add-row input { flex:1; padding:11px 14px; border:1.5px solid #ccc; border-radius:10px; }
+  .add-row input:focus { outline:none; border-color:var(--ink); }
+
+  .out-controls { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px; }
+  .out-controls select { padding:9px 14px; border-radius:999px; border:1.5px solid var(--ink); background:#fff; font-weight:600; cursor:pointer; }
+  .out { background:var(--soft); border-radius:14px; padding:22px 24px; white-space:pre-wrap; font-size:0.96rem; min-height:220px; }
+  .out-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .stat-row { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-bottom:18px; }
+  .stat { border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .stat b { display:block; font-size:1.6rem; font-weight:800; letter-spacing:-0.03em; line-height:1.1; }
+  .stat span { font-size:0.8rem; color:var(--muted); }
+  .app-foot { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; padding:14px 28px; border-top:1px solid var(--line); font-size:0.84rem; color:var(--muted); background:#fafafa; }
+
+  /* Kinds of wins */
+  .kinds-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin-top:36px; }
+  .kinds-grid div { border:1px solid var(--line); border-radius:var(--radius); padding:20px; }
+  .kinds-grid h3 { font-size:1rem; margin-bottom:6px; }
+  .kinds-grid p { margin:0; color:var(--muted); font-size:0.9rem; }
+  .rule-line { margin-top:36px; font-size:clamp(1.2rem, 2.4vw, 1.6rem); font-weight:700; letter-spacing:-0.02em; max-width:760px; }
+  .rule-line em { font-weight:400; }
+
+  /* Teams */
+  .teams-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:36px; }
+  .teams-grid div { background:var(--soft); border-radius:var(--radius); padding:24px; }
+  .teams-grid p { margin:0; color:var(--muted); }
+
+  /* Talk it out */
+  .mic-wrap { display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:12px 0 8px; }
+  .mic { width:96px; height:96px; border-radius:50%; border:none; background:var(--ink); color:#fff; cursor:pointer; display:grid; place-items:center; transition:transform .15s; }
+  .mic:hover { transform:scale(1.04); }
+  .mic svg { width:38px; height:38px; }
+  .mic.live { animation:pulse 1.4s infinite; background:#000; }
+  @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(0,0,0,.45); } 70% { box-shadow:0 0 0 22px rgba(0,0,0,0); } 100% { box-shadow:0 0 0 0 rgba(0,0,0,0); } }
+  .mic-status { font-weight:600; }
+  .prompts { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .prompts span { font-size:0.84rem; background:var(--soft); padding:6px 12px; border-radius:999px; }
+  #transcript { width:100%; min-height:150px; padding:16px; border:1.5px solid #ccc; border-radius:12px; resize:vertical; line-height:1.6; }
+  #transcript:focus { outline:none; border-color:var(--ink); }
+  .sorted { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+  .sorted-item { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .sorted-item input { border:none; font-weight:500; padding:4px 0; width:100%; background:transparent; }
+  .sorted-item input:focus { outline:none; }
+  .sorted-item select { padding:6px 10px; border-radius:999px; border:1.5px solid var(--ink); background:#fff; font-weight:600; font-size:0.82rem; cursor:pointer; }
+  .sorted-item.win { border-left:5px solid #000; }
+  .sorted-item.progress { border-left:5px solid #999; }
+  .sorted-item.blocker { border-left:5px dashed #000; }
+  .sorted-item.skip { opacity:.45; }
+  .me-row { display:flex; gap:12px; flex-wrap:wrap; align-items:end; padding:14px 28px; border-bottom:1px solid var(--line); }
+  .me-row .field { margin:0; flex:1 1 180px; }
+  .me-row input { padding:9px 12px; }
+
+  /* 1:1 shared view */
+  .oneone { min-height:100vh; background:var(--soft); }
+  .oneone-top { background:var(--ink); color:#fff; padding:24px 0 56px; }
+  .oneone-top h1 { color:#fff; font-size:clamp(2.2rem, 6vw, 3.6rem); }
+  .oneone-top p { color:#cfcfcf; margin:0; font-size:1.05rem; }
+  .oneone-body { margin-top:-32px; padding-bottom:64px; }
+  .card { background:#fff; border-radius:18px; padding:26px 28px; margin-bottom:16px; box-shadow:0 1px 0 rgba(0,0,0,.04); }
+  .card h2 { font-size:1.35rem; margin-bottom:14px; }
+  .card .topline { font-size:1.15rem; font-weight:700; letter-spacing:-0.015em; line-height:1.4; }
+  .o-item { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-top:1px solid var(--line); }
+  .o-item:first-of-type { border-top:none; }
+  .o-item input[type=checkbox] { width:20px; height:20px; margin-top:2px; accent-color:#000; flex:0 0 auto; }
+  .o-item p { margin:0; }
+  .o-item .sub { color:var(--muted); font-size:0.92rem; }
+  .o-item .moment { font-style:italic; color:var(--muted); font-size:0.92rem; margin-top:4px; }
+  .o-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .notes { width:100%; min-height:140px; padding:14px; border:1.5px solid #ccc; border-radius:12px; line-height:1.6; resize:vertical; }
+  .notes:focus { outline:none; border-color:var(--ink); }
+  .badge { display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; background:#fff; color:#000; padding:3px 10px; border-radius:999px; }
+  @media (max-width:760px) { .o-grid { grid-template-columns:1fr; } }
+
+  footer { background:var(--ink); color:#8a8a8a; padding:48px 0; font-size:0.88rem; }
+  footer a { color:#fff; }
+  footer p { margin:0 0 8px; max-width:760px; }
+
+  .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(16px); background:var(--ink); color:#fff; padding:11px 20px; border-radius:999px; font-weight:600; font-size:0.9rem; opacity:0; transition:all .2s; pointer-events:none; z-index:50; border:1px solid #444; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (max-width:900px) {
+    .hero-grid, .story-grid, .grid2 { grid-template-columns:1fr; }
+    .preview { transform:none; }
+    .problems, .problems.two, .teams-grid { grid-template-columns:1fr; }
+    .how { grid-template-columns:1fr 1fr; }
+    .kinds-grid { grid-template-columns:1fr 1fr; }
+    .stat-row { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:560px) {
+    .how, .kinds-grid { grid-template-columns:1fr; }
+    .topbar { margin-bottom:48px; }
+    .topbar nav { display:none; }
+    .panel { padding:20px; }
+    section { padding:64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#top">Wins <em>Out Loud</em></a>
+      <nav aria-label="Main">
+        <a href="#why">Why</a>
+        <a href="#how">How it works</a>
+        <a href="#try">Try it</a>
+        <a href="#teams">For teams</a>
+      </nav>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">A weekly hub for you and your manager</div>
+        <h1>Your week, <em>out loud.</em></h1>
+        <p class="lead">Before your 1:1, just <strong>talk through your week</strong>. Your wins, what's in progress, and where you're stuck become <strong>one clear page</strong> you and your manager work from together, every week and every quarter.</p>
+        <div class="btns">
+          <a class="btn solid-light" href="#try">Try it free: talk it out →</a>
+          <a class="btn light" href="#how">See how it works</a>
+        </div>
+        <p class="hero-note">No sign-up. Works in your browser, and nothing is stored on a server.</p>
+      </div>
+      <div class="preview" aria-label="Example weekly update">
+        <div class="p-head"><span>Weekly update</span><span>Week of Nov 16</span></div>
+        <div class="topline">Shipped the Q4 campaign on time, and the launch video is our best performer this quarter.</div>
+        <h4>Wins</h4>
+        <ul>
+          <li>Launched the Q4 campaign: 3 days early</li>
+          <li>Launch video hit 48K views in 5 days</li>
+          <li>Onboarded our new designer</li>
+        </ul>
+        <h4>In progress</h4>
+        <ul><li>January content calendar</li></ul>
+        <h4>Need help with</h4>
+        <ul><li>Sign-off on the case study by Thursday</li></ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <div class="eyebrow">The problem</div>
+    <h2>You do the work. <em>Then you forget you did it.</em></h2>
+    <div class="problems">
+      <div><b>"Uh…"</b><h3>Every 1:1 starts from memory</h3><p>Your manager asks how the week went, and the big things you did on Tuesday have already vanished.</p></div>
+      <div><b>6 mo.</b><h3>Review season is an archaeology dig</h3><p>You scroll through months of email trying to remember what you shipped and why it mattered.</p></div>
+      <div><b>Quiet</b><h3>Great work goes unseen</h3><p>The fire you put out, the teammate you helped, the deadline you saved. If you don't say it, nobody knows.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div>
+        <div class="eyebrow">Why I built this</div>
+        <blockquote>"When I started managing a team, I realized the best people were often the quietest about their wins. <em>So we started saying them out loud.</em>"</blockquote>
+      </div>
+      <div>
+        <p>When I started my freelance business, I hired a small team, and suddenly I was the one running the 1:1s. I kept noticing the same thing: people did great work all week, then showed up to our check-ins and couldn't remember half of it.</p>
+        <p>So we built a habit. Everyone jotted down wins as they happened, with what changed because of it and the moment behind it. Every week, those notes became a quick update. Our 1:1s got shorter and better, I could actually see what everyone was doing, and when it came time to give feedback or write a reference, the receipts were already there.</p>
+        <p>Wins Out Loud is that habit, turned into a tool anyone can use.</p>
+        <div class="sig">Maggie Currie<span>Human, story-led content at scale with AI-enabled systems</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>Talk for two minutes. <em>Walk in ready.</em></h2>
+    <div class="how">
+      <div><span class="when">Before your 1:1</span><h3>Talk it out</h3><p>Tap the mic and talk through your week, messy and unscripted. Or log wins as they happen.</p></div>
+      <div><span class="when">Right after</span><h3>Check the sort</h3><p>It sorts what you said into wins, in progress, and blockers. You decide what stays. Nothing is saved without you.</p></div>
+      <div><span class="when">One click</span><h3>Share with your manager</h3><p>Send one link to a clean 1:1 page. Your manager ticks off what you covered and adds notes and next steps.</p></div>
+      <div><span class="when">Every quarter</span><h3>Show your receipts</h3><p>Months of wins become a quarterly check-in, a self-review draft, or resume bullets, in seconds.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="app" id="try">
+  <div class="wrap">
+    <div class="eyebrow">Try it</div>
+    <h2>Your weekly hub. <em>Try it now.</em></h2>
+    <p class="lead">Everything saves in your browser on this device, and nothing is stored on a server. New here? <a href="#" id="load-example" style="color:#fff">Load an example week</a> to see how it works.</p>
+
+    <div class="app-shell">
+      <div class="me-row">
+        <div class="field"><label for="me-name">Your name</label><input id="me-name" placeholder="e.g. Maggie"></div>
+        <div class="field"><label for="mgr-name">Your manager's name</label><input id="mgr-name" placeholder="e.g. Jordan"></div>
+      </div>
+      <div class="app-tabs" role="tablist">
+        <button class="app-tab" role="tab" aria-selected="true" data-tab="talk">🎙 Talk it out</button>
+        <button class="app-tab" role="tab" aria-selected="false" data-tab="log">Wins <span class="n" id="n-wins">0</span></button>
+        <button class="app-tab" role="tab" aria-selected="false" data-tab="plan">In progress &amp; blockers <span class="n" id="n-plan">0</span></button>
+        <button class="app-tab" role="tab" aria-selected="false" data-tab="update">My 1:1 page</button>
+      </div>
+
+      <!-- TALK -->
+      <div class="panel" data-panel="talk">
+        <div class="grid2">
+          <div>
+            <div class="mic-wrap">
+              <button class="mic" id="mic" aria-label="Start talking"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="17" x2="12" y2="22"/></svg></button>
+              <div class="mic-status" id="mic-status">Tap to talk through your week</div>
+              <div class="prompts"><span>What went well?</span><span>What are you working on?</span><span>Where are you stuck?</span></div>
+            </div>
+            <label for="transcript" class="hint" style="display:block;margin:14px 0 6px">What you said (you can also type or paste here):</label>
+            <textarea id="transcript" placeholder="e.g. We launched the Q4 campaign three days early. I'm working on the January content calendar. I'm blocked waiting on legal sign-off for the case study."></textarea>
+            <div class="btns" style="margin-top:12px">
+              <button class="btn primary small" id="sort-it">Sort it for me →</button>
+              <button class="btn ghost small" id="clear-transcript">Clear</button>
+            </div>
+            <p class="hint" id="mic-help">Tip: pause between thoughts, and each one becomes its own item.</p>
+          </div>
+          <div>
+            <div class="list-head"><h3>Check the sort</h3><span class="muted" style="font-size:0.85rem">You decide what stays</span></div>
+            <div id="sorted"><div class="empty">Talk or type on the left, then hit <b>Sort it for me</b>. Each thought shows up here as a win, in progress, or a blocker. Change anything that's wrong.</div></div>
+            <div class="btns" style="margin-top:14px" id="sorted-actions" hidden>
+              <button class="btn primary small" id="add-sorted">Add to my hub</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOG -->
+      <div class="panel" data-panel="log" hidden>
+        <div class="grid2">
+          <form id="win-form" autocomplete="off">
+            <div class="field">
+              <label for="w-what">What did you do?</label>
+              <input id="w-what" required placeholder="e.g. Launched the Q4 campaign">
+            </div>
+            <div class="field">
+              <label for="w-impact">What changed because of it? <small>(optional, but it's what makes it a win)</small></label>
+              <input id="w-impact" placeholder="e.g. 3 days early, 48K views, saved the team 5 hours">
+            </div>
+            <div class="field">
+              <label>What kind of win?</label>
+              <div class="kinds" id="kinds" role="group" aria-label="Kind of win"></div>
+            </div>
+            <div class="field">
+              <label for="w-moment">The moment behind it <small>(optional)</small></label>
+              <textarea id="w-moment" placeholder="e.g. The client replied 'this is exactly what we needed' an hour after launch."></textarea>
+              <div class="hint">A real detail turns a stat into a story people remember.</div>
+            </div>
+            <div class="grid2" style="gap:12px">
+              <div class="field">
+                <label for="w-proof">Proof <small>(link)</small></label>
+                <input id="w-proof" type="url" placeholder="https://…">
+              </div>
+              <div class="field">
+                <label for="w-date">Date</label>
+                <input id="w-date" type="date">
+              </div>
+            </div>
+            <button class="btn primary" type="submit">+ Add win</button>
+          </form>
+
+          <div>
+            <div class="list-head">
+              <h3>Your wins</h3>
+              <span class="muted" style="font-size:0.85rem" id="nudge-count"></span>
+            </div>
+            <div class="entries" id="wins"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLAN -->
+      <div class="panel" data-panel="plan" hidden>
+        <div class="grid2">
+          <div>
+            <h3>In progress &amp; up next</h3>
+            <p class="muted" style="margin:0 0 12px;font-size:0.92rem">What you're working on. Tick it off when it's done, then log it as a win.</p>
+            <form class="add-row" id="todo-form"><input id="todo-input" placeholder="e.g. January content calendar" aria-label="New task"><button class="btn primary small" type="submit">Add</button></form>
+            <div class="simple-list" id="todos"></div>
+          </div>
+          <div>
+            <h3>Blockers &amp; asks</h3>
+            <p class="muted" style="margin:0 0 12px;font-size:0.92rem">Where you need a decision, sign-off, or help. These go straight into your 1:1 update.</p>
+            <form class="add-row" id="ask-form"><input id="ask-input" placeholder="e.g. Sign-off on the case study by Thursday" aria-label="New blocker or ask"><button class="btn primary small" type="submit">Add</button></form>
+            <div class="simple-list" id="asks"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPDATE -->
+      <div class="panel" data-panel="update" hidden>
+        <div class="stat-row">
+          <div class="stat"><b id="s-wins">0</b><span>wins in this period</span></div>
+          <div class="stat"><b id="s-impact">0</b><span>with a clear result</span></div>
+          <div class="stat"><b id="s-stories">0</b><span>with a story</span></div>
+          <div class="stat"><b id="s-top">–</b><span>most common kind</span></div>
+        </div>
+        <div class="out-controls">
+          <select id="out-type" aria-label="What to create">
+            <option value="weekly">1:1 weekly update</option>
+            <option value="quarterly">Quarterly check-in</option>
+            <option value="review">Self-review draft</option>
+            <option value="resume">Resume bullets</option>
+            <option value="post">LinkedIn post draft</option>
+          </select>
+          <select id="out-range" aria-label="Time period">
+            <option value="7">This week (last 7 days)</option>
+            <option value="14">Last 2 weeks</option>
+            <option value="30">Last 30 days</option>
+            <option value="90">Last 3 months</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+        <div class="out" id="out" aria-live="polite"></div>
+        <div class="out-actions">
+          <button class="btn primary small" id="share-1on1">Share with my manager →</button>
+          <button class="btn small" id="copy-out">Copy text</button>
+          <button class="btn small" id="copy-ai">Polish with AI: copy prompt</button>
+          <button class="btn small" id="export-csv">Export to spreadsheet (CSV)</button>
+        </div>
+        <p class="hint" style="margin-top:12px"><b>Share with my manager</b> copies a private link to a clean 1:1 page of this week. Everything is inside the link itself, so only people you send it to can see it. "Polish with AI" copies your update plus instructions, ready to paste into Claude, ChatGPT, or your company's approved AI tool. The instructions tell it never to invent numbers.</p>
+      </div>
+
+      <div class="app-foot">
+        <span>Saved in this browser only. Clearing your browser data will erase it, so export now and then.</span>
+        <button class="btn ghost small" id="clear-all">Clear everything</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="both-sides" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Built for both sides of the table</div>
+    <h2>Your manager gets visibility. <em>You get a record of your work.</em></h2>
+    <div class="problems two">
+      <div>
+        <h3>For you</h3>
+        <p style="margin-bottom:10px">A running database of everything you've done, with the results, the proof, and the stories behind it.</p>
+        <ul class="muted" style="margin:0;padding-left:18px">
+          <li>Weekly 1:1s that take minutes to prep</li>
+          <li>Quarterly check-ins with receipts, not guesswork</li>
+          <li>Self-reviews, promotion cases, and resume bullets, ready when you need them</li>
+        </ul>
+      </div>
+      <div>
+        <h3>For your manager</h3>
+        <p style="margin-bottom:10px">A clear view of what's happening, without chasing anyone for updates.</p>
+        <ul class="muted" style="margin:0;padding-left:18px">
+          <li>Wins, work in progress, and blockers at a glance</li>
+          <li>Blockers raised early, while they're still easy to fix</li>
+          <li>Specific, dated examples for feedback, reviews, and references</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kinds-of-wins">
+  <div class="wrap">
+    <div class="eyebrow">Not sure what counts?</div>
+    <h2>Wins come in <em>five shapes.</em></h2>
+    <div class="kinds-grid">
+      <div><h3>Shipped</h3><p>Something launched, published, delivered, or finished.</p></div>
+      <div><h3>Moved a number</h3><p>Views, revenue, time saved, response rates. Small numbers count.</p></div>
+      <div><h3>Fixed a problem</h3><p>A mistake caught early. A crisis calmed. The fire that never started.</p></div>
+      <div><h3>Helped someone</h3><p>A teammate unblocked, a new hire trained, a doc everyone reused.</p></div>
+      <div><h3>Grew</h3><p>A new skill, a first time doing something, feedback you acted on.</p></div>
+    </div>
+    <p class="rule-line">A simple test: if you'd be a little annoyed that someone else got the credit, <em>it's a win. Write it down.</em></p>
+  </div>
+</section>
+
+<section class="story" id="teams">
+  <div class="wrap">
+    <div class="eyebrow">For managers</div>
+    <h2>Run better 1:1s. <em>See your team's work.</em></h2>
+    <p class="lead muted">This started as a team habit. Here's how to use it with yours.</p>
+    <div class="teams-grid">
+      <div><h3>One page, two people</h3><p>Your report shares their 1:1 page before you meet. You see wins, work in progress, and blockers at a glance, then add notes and next steps together.</p></div>
+      <div><h3>Spend the time on what matters</h3><p>No more "so, what did you work on?" Skip the recap and go straight to blockers, growth, and decisions.</p></div>
+      <div style="display:none"><h3>Celebrate the quiet wins</h3><p>The "helped someone" and "fixed a problem" wins are easy to miss. Make a habit of naming them in team meetings.</p></div>
+      <div><h3>Write better reviews and references</h3><p>When review season comes, you both have months of specific, dated wins to work from, with proof.</p></div>
+    </div>
+  </div>
+</section>
+
+<main class="oneone" id="oneone" hidden>
+  <div class="oneone-top">
+    <div class="wrap">
+      <div class="topbar" style="margin-bottom:48px">
+        <a class="brand" href="./">Wins <em>Out Loud</em></a>
+        <span class="badge">1:1 page</span>
+      </div>
+      <div class="eyebrow" style="color:#999" id="o-week"></div>
+      <h1 id="o-title"></h1>
+      <p id="o-sub"></p>
+    </div>
+  </div>
+  <div class="wrap oneone-body">
+    <div class="card"><div class="eyebrow">Top line</div><div class="topline" id="o-topline"></div></div>
+    <div class="card"><h2>Wins</h2><div id="o-wins"></div></div>
+    <div class="o-grid">
+      <div class="card"><h2>In progress</h2><div id="o-todos"></div></div>
+      <div class="card"><h2>Where I need help</h2><div id="o-asks"></div></div>
+    </div>
+    <div class="card">
+      <h2>Notes &amp; next steps</h2>
+      <p class="muted" style="margin:0 0 12px">For either of you. Tick items above as you cover them, jot down decisions and who owns what, then copy the recap to send back.</p>
+      <textarea class="notes" id="o-notes" placeholder="e.g. Jordan to chase legal sign-off by Wednesday. Maggie to share the January calendar draft on Friday."></textarea>
+      <div class="btns" style="margin-top:12px">
+        <button class="btn primary small" id="o-copy">Copy 1:1 recap</button>
+        <a class="btn small" href="./">Make your own weekly hub →</a>
+      </div>
+    </div>
+    <p class="muted" style="font-size:0.85rem;text-align:center">Shared with Wins Out Loud. This page lives entirely inside its link, and nothing is stored on a server.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:#fff">Wins Out Loud</strong> · a free tool by <a href="https://www.linkedin.com/in/mary-anne-maggie-currie/">Maggie Currie</a>. Built with Claude and GitHub.</p>
+    <p>Your wins are saved only in your own browser and are never sent anywhere. If you use AI to polish an update, use a tool your company approves for work information.</p>
+    <p><a href="https://github.com/maggiecurrie/wins-out-loud">See how it's built on GitHub</a></p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const KINDS = ["Shipped", "Moved a number", "Fixed a problem", "Helped someone", "Grew"];
+const KEY = "wins-out-loud-v1";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const today = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,10); };
+const fmt = iso => new Date(iso + "T12:00:00").toLocaleDateString(undefined, { month:"short", day:"numeric" });
+const uid = () => Math.random().toString(36).slice(2, 10);
+
+let data = { wins:[], todos:[], asks:[] };
+let selectedKind = "Shipped";
+
+// ---------- storage (wrapped, since some browsers block it) ----------
+function load(){ try { const d = JSON.parse(localStorage.getItem(KEY) || "null"); if (d && d.wins) data = d; } catch(e){} }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){ toast("Couldn't save in this browser. Export to keep your wins."); } }
+
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2400); }
+async function copy(text, msg){
+  try { await navigator.clipboard.writeText(text); toast(msg); }
+  catch(e){
+    const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); toast(msg); } catch(_) { toast("Select the text to copy it"); }
+    ta.remove();
+  }
+}
+
+// ---------- tabs ----------
+function showTab(name){
+  document.querySelectorAll(".app-tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name));
+  document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== name);
+  if (name === "update") renderOutput();
+}
+document.querySelectorAll(".app-tab").forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+
+// ---------- kinds ----------
+$("#kinds").innerHTML = KINDS.map(k => `<button type="button" class="kind" aria-pressed="${k === selectedKind}" data-kind="${k}">${k}</button>`).join("");
+$("#kinds").addEventListener("click", e => {
+  const b = e.target.closest(".kind"); if (!b) return;
+  selectedKind = b.dataset.kind;
+  document.querySelectorAll(".kind").forEach(x => x.setAttribute("aria-pressed", x === b));
+});
+
+// ---------- wins ----------
+$("#w-date").value = today();
+$("#win-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const what = $("#w-what").value.trim(); if (!what) return;
+  data.wins.unshift({ id:uid(), ts:Date.now(), what, impact:$("#w-impact").value.trim(), kind:selectedKind, moment:$("#w-moment").value.trim(), proof:$("#w-proof").value.trim(), date:$("#w-date").value || today() });
+  save(); renderAll();
+  ["#w-what","#w-impact","#w-moment","#w-proof"].forEach(s => $(s).value = "");
+  $("#w-what").focus();
+  toast("Win logged 🎉");
+});
+function renderWins(){
+  const wins = [...data.wins].sort((a,b) => b.date.localeCompare(a.date) || (b.ts || 0) - (a.ts || 0));
+  $("#n-wins").textContent = wins.length;
+  const missing = wins.filter(w => !hasResult(w)).length;
+  $("#nudge-count").textContent = missing ? `${missing} need${missing === 1 ? "s" : ""} a result` : (wins.length ? "All wins have a result ✓" : "");
+  $("#wins").innerHTML = wins.length ? wins.map(w => `
+    <article class="entry">
+      <button class="del" data-del-win="${w.id}" aria-label="Delete win">×</button>
+      <div class="e-top"><span>${fmt(w.date)}</span><span class="tag">${esc(w.kind)}</span></div>
+      <p class="what">${esc(w.what)}</p>
+      ${w.impact ? `<p class="impact">→ ${esc(w.impact)}</p>` : hasResult(w) ? "" : `<button class="nudge" data-add-impact="${w.id}">+ What changed because of this?</button>`}
+      ${w.moment ? `<p class="moment">"${esc(w.moment)}"</p>` : ""}
+      ${w.proof ? `<a class="proof" href="${esc(w.proof)}" target="_blank" rel="noopener">Proof ↗</a>` : ""}
+    </article>`).join("")
+    : `<div class="empty">No wins yet. Log your first one, even a small one. Or <a href="#" data-example>load an example week</a>.</div>`;
+}
+$("#wins").addEventListener("click", e => {
+  const d = e.target.closest("[data-del-win]"); const a = e.target.closest("[data-add-impact]"); const ex = e.target.closest("[data-example]");
+  if (d) { data.wins = data.wins.filter(w => w.id !== d.dataset.delWin); save(); renderAll(); }
+  if (a) {
+    const w = data.wins.find(x => x.id === a.dataset.addImpact);
+    const v = prompt(`What changed because of "${w.what}"?\n\nA number is great (time saved, views, revenue). "Who it helped and how" counts too.`);
+    if (v && v.trim()) { w.impact = v.trim(); save(); renderAll(); }
+  }
+  if (ex) { e.preventDefault(); loadExample(); }
+});
+
+// ---------- todos & asks ----------
+function simpleList(listKey, el, countIt){
+  const items = data[listKey];
+  el.innerHTML = items.length ? items.map(i => `
+    <div class="simple-item ${i.done ? "done" : ""}">
+      <input type="checkbox" ${i.done ? "checked" : ""} data-toggle="${listKey}:${i.id}" aria-label="Mark done">
+      <span>${esc(i.text)}</span>
+      <button class="del" data-del="${listKey}:${i.id}" aria-label="Delete">×</button>
+    </div>`).join("") : `<div class="empty" style="padding:18px">Nothing here yet.</div>`;
+}
+function renderPlan(){
+  simpleList("todos", $("#todos")); simpleList("asks", $("#asks"));
+  $("#n-plan").textContent = data.todos.filter(t => !t.done).length + data.asks.filter(t => !t.done).length;
+}
+function addTo(listKey, input){ const v = input.value.trim(); if (!v) return; data[listKey].push({ id:uid(), text:v, done:false }); input.value = ""; save(); renderAll(); }
+$("#todo-form").addEventListener("submit", e => { e.preventDefault(); addTo("todos", $("#todo-input")); });
+$("#ask-form").addEventListener("submit", e => { e.preventDefault(); addTo("asks", $("#ask-input")); });
+document.addEventListener("change", e => {
+  const t = e.target.closest("[data-toggle]"); if (!t) return;
+  const [k, id] = t.dataset.toggle.split(":"); const item = data[k].find(i => i.id === id);
+  item.done = t.checked; save(); renderAll();
+  if (k === "todos" && t.checked) toast("Nice. Want to log it as a win?");
+});
+document.addEventListener("click", e => {
+  const d = e.target.closest("[data-del]"); if (!d) return;
+  const [k, id] = d.dataset.del.split(":"); data[k] = data[k].filter(i => i.id !== id); save(); renderAll();
+});
+
+// ---------- outputs ----------
+function inRange(){
+  const r = $("#out-range").value;
+  const wins = [...data.wins].sort((a,b) => a.date.localeCompare(b.date) || (a.ts || 0) - (b.ts || 0));
+  if (r === "all") return wins;
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - (+r - 1)); cutoff.setHours(0,0,0,0);
+  return wins.filter(w => new Date(w.date + "T12:00:00") >= cutoff);
+}
+function topKind(wins){
+  const c = {}; wins.forEach(w => c[w.kind] = (c[w.kind] || 0) + 1);
+  return Object.entries(c).sort((a,b) => b[1] - a[1])[0]?.[0] || "–";
+}
+const hasResult = w => !!w.impact || /(?<![Qq])\d/.test(w.what);
+function line(w){ return w.impact ? `${w.what}: ${w.impact}` : hasResult(w) ? w.what : `${w.what} [add the result]`; }
+function verbFirst(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+function build(type, wins){
+  const openTodos = data.todos.filter(t => !t.done).map(t => t.text);
+  const openAsks = data.asks.filter(t => !t.done).map(t => t.text);
+  if (!wins.length && type !== "weekly") return "No wins in this period yet. Log a few, or choose a longer time period.";
+  if (type === "weekly") {
+    const best = wins.filter(hasResult)[0] || wins[0];
+    const head = wins.length
+      ? `Top line: ${wins.length} win${wins.length === 1 ? "" : "s"} this period. Biggest: ${best.what}${best.impact ? ` (${best.impact})` : ""}.${openAsks.length ? ` ${openAsks.length} thing${openAsks.length === 1 ? "" : "s"} I need help with.` : ""}`
+      : "Top line: a heads-down week. Here's where things stand.";
+    let s = head + "\n\nWins\n" + (wins.length ? wins.map(w => `• ${line(w)}`).join("\n") : "• (none logged yet)");
+    const stories = wins.filter(w => w.moment);
+    if (stories.length) s += `\n\nA moment worth sharing\n• ${stories[stories.length - 1].moment}`;
+    s += "\n\nIn progress / up next\n" + (openTodos.length ? openTodos.map(t => `• ${t}`).join("\n") : "• (nothing listed)");
+    s += "\n\nWhere I need help\n" + (openAsks.length ? openAsks.map(t => `• ${t}`).join("\n") : "• Nothing blocking right now.");
+    return s;
+  }
+  if (type === "quarterly") {
+    let s = `Quarterly check-in\n\nAt a glance: ${wins.length} win${wins.length === 1 ? "" : "s"} this quarter, ${wins.filter(hasResult).length} with a clear result.\n`;
+    KINDS.forEach(k => {
+      const g = wins.filter(w => w.kind === k); if (!g.length) return;
+      s += `\n${k} (${g.length})\n` + g.map(w => `• ${line(w)}`).join("\n") + "\n";
+    });
+    const stories = wins.filter(w => w.moment);
+    if (stories.length) s += `\nThe moment I'm proudest of\n${stories[stories.length - 1].moment}\n`;
+    s += "\nStill in progress\n" + (openTodos.length ? openTodos.map(t => `• ${t}`).join("\n") : "• (nothing listed)");
+    s += "\n\nWhat would help me next quarter\n" + (openAsks.length ? openAsks.map(t => `• ${t}`).join("\n") : "• [Add support, resources, or decisions you need]");
+    s += "\n\nGoals for next quarter\n• [Goal 1]\n• [Goal 2]";
+    return s;
+  }
+  if (type === "review") {
+    let s = "Self-review draft\n\nOver this period, I focused on delivering results, solving problems, and supporting the people around me. Highlights below, grouped by type.\n";
+    KINDS.forEach(k => {
+      const g = wins.filter(w => w.kind === k); if (!g.length) return;
+      s += `\n${k}\n` + g.map(w => `• ${line(w)}${w.proof ? ` (proof: ${w.proof})` : ""}`).join("\n") + "\n";
+    });
+    const stories = wins.filter(w => w.moment);
+    if (stories.length) s += `\nA moment I'm proud of\n${stories[stories.length - 1].moment}\n`;
+    s += "\nLooking ahead\n• [Add 1–2 goals for next period]";
+    return s;
+  }
+  if (type === "resume") {
+    const withImpact = wins.filter(w => w.impact);
+    const pick = (withImpact.length ? withImpact : wins).slice(-5).reverse();
+    return "Resume bullets (strongest first)\n\n" + pick.map(w => `• ${verbFirst(w.what)}${w.impact ? `, ${w.impact.charAt(0).toLowerCase() + w.impact.slice(1)}` : " [add the result]"}`).join("\n")
+      + (withImpact.length ? "" : "\n\nTip: add a result to each win to make these stronger.");
+  }
+  if (type === "post") {
+    const w = wins.filter(x => x.moment).slice(-1)[0] || wins.filter(x => x.impact).slice(-1)[0] || wins.slice(-1)[0];
+    return `${w.moment ? w.moment : "[Open with the moment: who was there, what was said, how it felt.]"}\n\nThat was the moment ${w.what.charAt(0).toLowerCase() + w.what.slice(1)} came together${w.impact ? `, and the result: ${w.impact.charAt(0).toLowerCase() + w.impact.slice(1)}` : ""}.\n\n[One sentence on what you learned, or who you'd like to thank.]\n\n[Optional: a question for your network.]`;
+  }
+}
+function renderOutput(){
+  const wins = inRange();
+  $("#s-wins").textContent = wins.length;
+  $("#s-impact").textContent = wins.filter(hasResult).length;
+  $("#s-stories").textContent = wins.filter(w => w.moment).length;
+  $("#s-top").textContent = wins.length ? topKind(wins) : "–";
+  $("#s-top").style.fontSize = wins.length ? "1.05rem" : "";
+  $("#out").textContent = build($("#out-type").value, wins);
+}
+$("#out-type").addEventListener("change", () => {
+  const t = $("#out-type").value; const r = $("#out-range");
+  r.value = t === "weekly" ? "7" : t === "post" ? "30" : "90"; renderOutput();
+});
+$("#out-range").addEventListener("change", renderOutput);
+$("#copy-out").addEventListener("click", () => copy($("#out").textContent, "Copied. Paste it into Slack, email, or your doc"));
+$("#copy-ai").addEventListener("click", () => {
+  const kind = $("#out-type").selectedOptions[0].textContent;
+  const prompt = `Please polish this ${kind.toLowerCase()} so it reads clearly and confidently, in a warm, plain, human voice.\n\nRules:\n- Use only the facts below. Never invent numbers, results, names, or quotes.\n- Where you see [add the result] or another bracket, keep the bracket and ask me for it.\n- Keep it short and easy to skim.\n\n---\n${$("#out").textContent}`;
+  copy(prompt, "Prompt copied. Paste it into your AI tool");
+});
+$("#export-csv").addEventListener("click", () => {
+  const rows = [["Date","What I did","What changed","Kind","The moment","Proof"], ...[...data.wins].sort((a,b) => a.date.localeCompare(b.date)).map(w => [w.date, w.what, w.impact, w.kind, w.moment, w.proof])];
+  const csv = rows.map(r => r.map(c => `"${String(c ?? "").replace(/"/g,'""')}"`).join(",")).join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type:"text/csv" })); a.download = `my-wins-${today()}.csv`; a.click();
+  toast("Downloaded. Open it in Google Sheets or Excel");
+});
+
+// ---------- example + clear ----------
+function daysAgo(n){ const d = new Date(); d.setDate(d.getDate() - n); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,10); }
+function loadExample(){
+  if (data.wins.length && !confirm("Add example wins alongside your own?")) return;
+  data.wins.push(
+    { id:uid(), what:"Launched the Q4 campaign", impact:"3 days ahead of schedule", kind:"Shipped", moment:"The client replied 'this is exactly what we needed' an hour after it went live.", proof:"", date:daysAgo(1) },
+    { id:uid(), what:"Grew the launch video's reach", impact:"48K views in 5 days, our best this quarter", kind:"Moved a number", moment:"", proof:"", date:daysAgo(2) },
+    { id:uid(), what:"Caught a wrong price in the email before it sent", impact:"Avoided a correction email to 20K subscribers", kind:"Fixed a problem", moment:"", proof:"", date:daysAgo(3) },
+    { id:uid(), what:"Onboarded our new designer", impact:"", kind:"Helped someone", moment:"She shipped her first social post on day three.", proof:"", date:daysAgo(4) },
+    { id:uid(), what:"Ran my first workshop on writing hooks", impact:"12 people attended, 3 asked for a follow-up", kind:"Grew", moment:"", proof:"", date:daysAgo(5) }
+  );
+  if (!data.todos.length) data.todos.push({ id:uid(), text:"January content calendar", done:false }, { id:uid(), text:"Case study interview with a new client", done:false });
+  if (!data.asks.length) data.asks.push({ id:uid(), text:"Sign-off on the case study by Thursday", done:false });
+  if (!$("#me-name").value) $("#me-name").value = "Maggie"; if (!$("#mgr-name").value) $("#mgr-name").value = "Jordan"; saveNames();
+  save(); renderAll(); showTab("update"); toast("Example week loaded");
+}
+$("#load-example").addEventListener("click", e => { e.preventDefault(); loadExample(); document.querySelector(".app-shell").scrollIntoView({ behavior:"smooth" }); });
+$("#clear-all").addEventListener("click", () => {
+  if (!confirm("Clear all wins, tasks and asks from this browser? This can't be undone. Export first if you want a copy.")) return;
+  data = { wins:[], todos:[], asks:[] }; save(); renderAll(); toast("Cleared");
+});
+
+// ---------- names ----------
+function loadNames(){ try { const n = JSON.parse(localStorage.getItem(KEY + "-names") || "{}"); $("#me-name").value = n.me || ""; $("#mgr-name").value = n.mgr || ""; } catch(e){} }
+function saveNames(){ try { localStorage.setItem(KEY + "-names", JSON.stringify({ me:$("#me-name").value.trim(), mgr:$("#mgr-name").value.trim() })); } catch(e){} }
+$("#me-name").addEventListener("input", saveNames); $("#mgr-name").addEventListener("input", saveNames);
+
+// ---------- talk it out ----------
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null, listening = false, baseText = "";
+function setMic(on){
+  listening = on; $("#mic").classList.toggle("live", on);
+  $("#mic").setAttribute("aria-label", on ? "Stop talking" : "Start talking");
+  $("#mic-status").textContent = on ? "Listening… tap again when you're done" : "Tap to talk through your week";
+}
+if (!SR) {
+  $("#mic-help").textContent = "Voice isn't supported in this browser. Try Chrome, Edge, or Safari, or use your keyboard's microphone button to dictate into the box.";
+} else {
+  rec = new SR(); rec.continuous = true; rec.interimResults = true; rec.lang = navigator.language || "en-US";
+  rec.onresult = e => {
+    let finals = "", interim = "";
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const t = e.results[i][0].transcript.trim();
+      if (e.results[i].isFinal) finals += (t ? t.charAt(0).toUpperCase() + t.slice(1) + (/[.!?]$/.test(t) ? "" : ".") + "\n" : "");
+      else interim += t + " ";
+    }
+    if (finals) baseText += finals;
+    $("#transcript").value = baseText + interim;
+  };
+  rec.onend = () => { if (listening) { try { rec.start(); } catch(_) { setMic(false); } } };
+  rec.onerror = e => { setMic(false); if (e.error === "not-allowed") toast("Allow microphone access to talk it out"); };
+}
+$("#mic").addEventListener("click", () => {
+  if (!rec) { $("#transcript").focus(); toast("Type or dictate into the box"); return; }
+  if (listening) { setMic(false); rec.stop(); }
+  else { baseText = $("#transcript").value ? $("#transcript").value.replace(/\s*$/, "\n") : ""; try { rec.start(); setMic(true); } catch(_) {} }
+});
+$("#clear-transcript").addEventListener("click", () => { $("#transcript").value = ""; baseText = ""; $("#sorted").innerHTML = '<div class="empty">Cleared. Talk or type on the left, then hit <b>Sort it for me</b>.</div>'; $("#sorted-actions").hidden = true; });
+
+const RX = {
+  blocker: /\b(blocked|blocker|stuck|waiting (on|for)|need(s|ed)? (help|a hand|sign[- ]?off|approval|a decision|input|feedback|budget|access)|can'?t|cannot|struggl\w*|behind (on|schedule)|delay\w*|at risk|risk|concern\w*|worried|help with|unclear|don'?t know how)\b/i,
+  progress: /\b(working on|in progress|next week|going to|gonna|plan(ning)? to|will |starting|drafting|still|continu\w*|up next|tomorrow|this week i'?m|i'?m (doing|building|writing|preparing|finishing)|finishing|on track)\b/i,
+  win: /\b(launched|shipped|finished|completed|closed|won|hit|grew|increased|reduced|cut|saved|got|delivered|published|presented|hired|onboarded|trained|fixed|solved|caught|approved|signed|landed|record|best|proud|thanked|praised|wrapped|released|exceeded|beat|crushed|nailed|booked|secured)\b/i,
+};
+function guessKind(t){
+  if (/(?<![Qq])\d|percent|%|double|triple/i.test(t)) return "Moved a number";
+  if (/\b(fixed|solved|caught|prevented|avoided|resolved|saved the)\b/i.test(t)) return "Fixed a problem";
+  if (/\b(helped|onboarded|trained|mentored|coached|supported|taught|unblocked)\b/i.test(t)) return "Helped someone";
+  if (/\b(learned|first time|course|certif|feedback|grew|new skill)\b/i.test(t)) return "Grew";
+  return "Shipped";
+}
+function classify(t){
+  if (RX.blocker.test(t)) return "blocker";
+  if (RX.progress.test(t)) return "progress";
+  if (RX.win.test(t) || /\b\w+ed\b/i.test(t)) return "win";
+  return "progress";
+}
+function splitThoughts(text){
+  return text.split(/\n+|(?<=[.!?])\s+/).map(x => { let y = x.trim(), prev; do { prev = y; y = y.replace(/^(um+|uh+|so|and|also|okay|ok|like|yeah|well|then),?\s+/i, ""); } while (y !== prev); return y; }).filter(x => x.length > 3)
+    .map(x => x.charAt(0).toUpperCase() + x.slice(1).replace(/[.]+$/, ""));
+}
+let sorted = [];
+function renderSorted(){
+  if (!sorted.length) { $("#sorted").innerHTML = '<div class="empty">Nothing to sort yet.</div>'; $("#sorted-actions").hidden = true; return; }
+  $("#sorted").innerHTML = '<div class="sorted">' + sorted.map((x,i) => `
+    <div class="sorted-item ${x.type}">
+      <input value="${esc(x.text)}" data-sorted-text="${i}" aria-label="Item text">
+      <select data-sorted-type="${i}" aria-label="Item type">
+        <option value="win" ${x.type==="win"?"selected":""}>🏆 Win</option>
+        <option value="progress" ${x.type==="progress"?"selected":""}>⏳ In progress</option>
+        <option value="blocker" ${x.type==="blocker"?"selected":""}>🚧 Blocker / ask</option>
+        <option value="skip" ${x.type==="skip"?"selected":""}>Skip</option>
+      </select>
+    </div>`).join("") + "</div>";
+  $("#sorted-actions").hidden = false;
+}
+$("#sort-it").addEventListener("click", () => {
+  if (listening) { setMic(false); rec.stop(); }
+  const items = splitThoughts($("#transcript").value);
+  if (!items.length) { toast("Say or type a few things first"); return; }
+  sorted = items.map(t => ({ text:t, type:classify(t) })); renderSorted();
+});
+$("#sorted").addEventListener("input", e => { const i = e.target.dataset.sortedText; if (i !== undefined) sorted[i].text = e.target.value; });
+$("#sorted").addEventListener("change", e => { const i = e.target.dataset.sortedType; if (i !== undefined) { sorted[i].type = e.target.value; renderSorted(); } });
+$("#add-sorted").addEventListener("click", () => {
+  let w = 0, p = 0, b = 0;
+  sorted.forEach((x, idx) => {
+    const t = x.text.trim(); if (!t) return;
+    if (x.type === "win") { data.wins.unshift({ id:uid(), ts:Date.now() + idx, what:t, impact:"", kind:guessKind(t), moment:"", proof:"", date:today() }); w++; }
+    if (x.type === "progress") { data.todos.push({ id:uid(), text:t, done:false }); p++; }
+    if (x.type === "blocker") { data.asks.push({ id:uid(), text:t, done:false }); b++; }
+  });
+  save(); renderAll(); sorted = []; renderSorted(); $("#transcript").value = ""; baseText = "";
+  toast(`Added ${w} win${w===1?"":"s"}, ${p} in progress, ${b} blocker${b===1?"":"s"}`);
+  showTab("update");
+});
+
+// ---------- share with manager ----------
+function encode(obj){ const bytes = new TextEncoder().encode(JSON.stringify(obj)); let bin = ""; bytes.forEach(b => bin += String.fromCharCode(b)); return btoa(bin).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); }
+function decode(str){ const b = atob(str.replace(/-/g,"+").replace(/_/g,"/")); return JSON.parse(new TextDecoder().decode(Uint8Array.from(b, c => c.charCodeAt(0)))); }
+$("#share-1on1").addEventListener("click", () => {
+  const wins = inRange();
+  const payload = { v:1, me:$("#me-name").value.trim(), mgr:$("#mgr-name").value.trim(), from:wins[0]?.date || today(), to:today(), range:$("#out-range").selectedOptions[0].textContent,
+    wins:wins.map(w => ({ w:w.what, i:w.impact, k:w.kind, m:w.moment, p:w.proof })),
+    todos:data.todos.filter(t => !t.done).map(t => t.text), asks:data.asks.filter(t => !t.done).map(t => t.text) };
+  const url = location.href.split("#")[0] + "#1on1=" + encode(payload);
+  copy(url, "Link copied. Send it to your manager before your 1:1");
+});
+function topLineFor(p){
+  const ws = p.wins; if (!ws.length) return "A heads-down stretch. Here's what's in progress and where help is needed.";
+  const best = ws.filter(w => w.i || /(?<![Qq])\d/.test(w.w))[0] || ws[0];
+  return `${ws.length} win${ws.length===1?"":"s"}. Biggest: ${best.w}${best.i ? ` (${best.i})` : ""}.${p.asks.length ? ` ${p.asks.length} thing${p.asks.length===1?"":"s"} to unblock.` : " Nothing blocking right now."}`;
+}
+function showOneOnOne(p){
+  document.querySelectorAll("body > header, body > section, body > footer").forEach(el => el.hidden = true);
+  $("#oneone").hidden = false; window.scrollTo(0,0);
+  const who = p.me || "Your teammate";
+  $("#o-week").textContent = `${p.range || "This week"} · shared ${fmt(p.to)}`;
+  $("#o-title").innerHTML = `${esc(who)}'s week, <em>out loud.</em>`;
+  $("#o-sub").textContent = p.mgr ? `Prepared for a 1:1 with ${p.mgr}.` : "Prepared for a 1:1.";
+  document.title = `${who}'s week · Wins Out Loud`;
+  $("#o-topline").textContent = topLineFor(p);
+  const item = (key, i, main, sub, moment) => `<label class="o-item"><input type="checkbox" data-o="${key}${i}"><div><p><b>${esc(main)}</b></p>${sub ? `<p class="sub">${esc(sub)}</p>` : ""}${moment ? `<p class="moment">"${esc(moment)}"</p>` : ""}</div></label>`;
+  $("#o-wins").innerHTML = p.wins.length ? p.wins.map((w,i) => item("w", i, w.w, [w.k, w.i].filter(Boolean).join(" · "), w.m)).join("") : '<p class="muted">No wins logged for this period.</p>';
+  $("#o-todos").innerHTML = p.todos.length ? p.todos.map((t,i) => item("t", i, t)).join("") : '<p class="muted">Nothing listed.</p>';
+  $("#o-asks").innerHTML = p.asks.length ? p.asks.map((t,i) => item("a", i, t)).join("") : '<p class="muted">Nothing blocking right now. 🎉</p>';
+  $("#o-copy").onclick = () => {
+    const done = k => [...document.querySelectorAll(`[data-o^="${k}"]`)].filter(c => c.checked).length;
+    const txt = `1:1 recap: ${who}${p.mgr ? ` & ${p.mgr}` : ""} (${fmt(p.to)})\n\nTop line: ${topLineFor(p)}\n\nWins\n${p.wins.map(w => `• ${w.w}${w.i ? `: ${w.i}` : ""}`).join("\n") || "• None logged"}\n\nIn progress\n${p.todos.map(t => `• ${t}`).join("\n") || "• Nothing listed"}\n\nBlockers & asks\n${p.asks.map(t => `• ${t}`).join("\n") || "• None"}\n\nCovered: ${done("w") + done("t") + done("a")} of ${p.wins.length + p.todos.length + p.asks.length} items\n\nNotes & next steps\n${$("#o-notes").value.trim() || "(none)"}`;
+    copy(txt, "Recap copied. Paste it into Slack or email");
+  };
+}
+
+function renderAll(){ renderWins(); renderPlan(); if (!$("[data-panel=update]").hidden) renderOutput(); }
+const shared = location.hash.startsWith("#1on1=") ? (() => { try { return decode(location.hash.slice(6)); } catch(e){ return null; } })() : null;
+if (shared) showOneOnOne(shared);
+else { load(); loadNames(); renderAll(); }
+</script>
+</body>
+</html>
